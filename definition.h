@@ -3,7 +3,7 @@
 #include<vector>
 using namespace std;
 
-class INTAL{
+class BIGINT {
     private:
         string str;
         static string add(string s1, string s2);
@@ -13,48 +13,34 @@ class INTAL{
         static string factorial(int n);
     public:
 
-        INTAL();
-        INTAL(string s);
-        INTAL(long long int n);
-        INTAL(const INTAL &N);
+        BIGINT();
+        BIGINT(string s);
+        BIGINT(long long int n);
+        BIGINT(const BIGINT &N);
 
         bool inputVerification(string s);
 
-        friend ostream &operator<<(ostream &output, const INTAL &N);
-        friend istream &operator>>(istream &input, INTAL &N);
+        friend ostream &operator<<(ostream &output, const BIGINT &N);
+        friend istream &operator>>(istream &input, BIGINT &N);
 
-        static INTAL to_INTAL(string s);
-        static INTAL to_INTAL(long long int n);
+        static BIGINT to_BIGINT(string s);
+        static BIGINT to_BIGINT(long long int n);
         static string remove_0_front(string s);
         
-        INTAL operator++();
-        INTAL operator--();
-        INTAL operator++(int);
-        INTAL operator--(int);
-        INTAL operator+(INTAL const &N);
-        INTAL operator-(INTAL const &N);
-        INTAL operator*(INTAL const &N);
-        INTAL operator/(INTAL const &N);
-        bool operator==(INTAL const &N);
-        bool operator!=(INTAL const &N);
+        BIGINT operator++();
+        BIGINT operator--();
+        BIGINT operator++(int);
+        BIGINT operator--(int);
+        BIGINT operator+(BIGINT const &N);
+        BIGINT operator-(BIGINT const &N);
+        BIGINT operator*(BIGINT const &N);
+        BIGINT operator/(BIGINT const &N);
+        bool operator==(BIGINT const &N);
+        bool operator!=(BIGINT const &N);
 
-        friend INTAL operator+(INTAL &N,int n);
-        friend INTAL operator-(INTAL &N,int n);
-        friend INTAL operator*(INTAL &N,int n);
-        friend INTAL operator/(INTAL &N,int n);
-        friend INTAL operator+(int n, INTAL &N);
-        friend INTAL operator-(int n, INTAL &N);
-        friend INTAL operator*(int n, INTAL &N);
-        friend INTAL operator/(int n, INTAL &N);
-        
-        static INTAL factINTAL(INTAL N);
-        static INTAL factINTAL(string s);
-        static INTAL factINTAL(int n);
-        
-        static string maxCompare(string s1, string s2);
-        static string minCompare(string s1, string s2);
-
-        static INTAL maxINTAL(INTAL N1, INTAL N2);
-        static INTAL minINTAL(INTAL N1, INTAL N2);    
-        static INTAL absINTAL(INTAL N);
-};  
+        friend BIGINT operator+(BIGINT &N,int n);
+        friend BIGINT operator-(BIGINT &N,int n);
+        friend BIGINT operator*(BIGINT &N,int n);
+        friend BIGINT operator/(BIGINT &N,int n);
+        friend BIGINT operator+(int n, BIGINT &N);
+       
