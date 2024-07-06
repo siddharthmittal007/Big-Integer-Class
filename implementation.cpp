@@ -1,6 +1,6 @@
 #include "definition.h"
 
-string INTAL::add(string s1, string s2){
+string BIGINT::add(string s1, string s2){
     int carry=0,i,j;
     int sum = 0;
     int x = s1.length();
@@ -20,7 +20,7 @@ string INTAL::add(string s1, string s2){
         answer = subtract(s1,s2.erase(0,1));
     }
     else{
-        vector<int>v;
+        vector<int> v;
         for(i=x-1,j=y-1; i>=0 or j>=0; i--,j--){
             sum = carry;
             if(i>=0){
@@ -42,9 +42,9 @@ string INTAL::add(string s1, string s2){
     return answer;
 }
 
-string INTAL::subtract(string s1, string s2){
-    string answer = "",ans,temp;
-    int carry=0,p=0,i,j,k,flag1=0,flag2=0;
+string BIGINT::subtract(string s1, string s2){
+    string answer = "", ans, temp;
+    int carry=0, p=0, i, j, k, flag1=0, flag2=0;
     int sum=0;
     if(s1==s2){
         return "0";
@@ -124,7 +124,7 @@ string INTAL::subtract(string s1, string s2){
     return answer;
 }
 
-string INTAL::multiply(string s1, string s2){
+string BIGINT::multiply(string s1, string s2){
     if(s1=="0" or s2=="0"){
         return "0";
     }
@@ -162,7 +162,8 @@ string INTAL::multiply(string s1, string s2){
     answer = remove_0_front(answer);
     return answer;
 }
-string INTAL::division(string s1, long long int n){
+
+string BIGINT::division(string s1, long long int n){
     string answer;
     int index = 0;
     long long int temp = s1[index] - '0';
@@ -181,9 +182,10 @@ string INTAL::division(string s1, long long int n){
     answer = remove_0_front(answer);
     return answer;
 }
-string INTAL::factorial(int n){
+
+string BIGINT::factorial(int n){
     string s;
-    INTAL A("1");
+    BIGINT A("1");
     for(int i=1; i<=n; i++){
         A = A*i;
     }
@@ -191,11 +193,11 @@ string INTAL::factorial(int n){
 }
 
 //default constructor
-INTAL::INTAL(){
+BIGINT::BIGINT(){
     str = "0";
 }
 
-INTAL::INTAL(string s){
+BIGINT::BIGINT(string s){
     if(!inputVerification(s)){
         cerr<<"Invalid Input"<<endl;
         exit(0);
@@ -203,13 +205,13 @@ INTAL::INTAL(string s){
     str = s;
 }
 
-INTAL::INTAL(long long int n){
+BIGINT::BIGINT(long long int n){
     ostringstream convert;
     convert<<n;
     str = convert.str();
 }
 
-INTAL::INTAL(const INTAL &N){
+BIGINT::BIGINT(const BIGINT &N){
     if(!inputVerification(N.str)){
         cerr<<"Invalid Input"<<endl;       
         exit(0);
@@ -218,7 +220,7 @@ INTAL::INTAL(const INTAL &N){
 }
 
 //verification of argument string 
-bool INTAL::inputVerification(string s){
+bool BIGINT::inputVerification(string s){
     if(s[0]=='-'){
         s.erase(0,1);
     }
@@ -230,31 +232,31 @@ bool INTAL::inputVerification(string s){
     return true;
 }
 //overloading <<
-ostream &operator<<(ostream &output, const INTAL &N){
+ostream &operator<<(ostream &output, const BIGINT &N){
     output<<N.str;
     return output;
 }
 //overloading >>
-istream &operator>>(istream &input, INTAL &N){
+istream &operator>>(istream &input, BIGINT &N){
     input>>N.str;
     return input;
 }
 
-INTAL INTAL::to_INTAL(string s){
-    INTAL N;
+BIGINT BIGINT::to_BIGINT(string s){
+    BIGINT N;
     N.str = s;
     return N;
 }
 
-INTAL INTAL::to_INTAL(long long int n){
-    INTAL N;
+BIGINT BIGINT::to_BIGINT(long long int n){
+    BIGINT N;
     ostringstream convert;
     convert<<n;
     N.str = convert.str();
     return N; 
 }
 
-string INTAL::remove_0_front(string s){
+string BIGINT::remove_0_front(string s){
     int i=0, flag=0;    
     if(s[0]=='-'){
         flag=1;
@@ -271,62 +273,61 @@ string INTAL::remove_0_front(string s){
 }
 
 
-INTAL INTAL::operator++(){  //pre increment
+BIGINT BIGINT::operator++(){  //pre increment
     string s = "1";
     str = add(this->str,s);
     return *this;
 }
 
-INTAL INTAL::operator--(){   //pre increment
+BIGINT BIGINT::operator--(){   //pre increment
     string s = "1";
     str = subtract(this->str,s);
     return *this;
 }
 
-INTAL INTAL::operator++(int){  //post increment
+BIGINT BIGINT::operator++(int){  //post increment
     string s = "1";
     str = add(str,s);
     return *this;
 
-    // INTAL N;
+    // BIGINT N;
     // N.str = this->str;
     // string s = "1";
     // str = add(this->str,s);
     // return N;
 }
 
-INTAL INTAL::operator--(int){  //post increment
+BIGINT BIGINT::operator--(int){  //post increment
     string s = "1";
     str = subtract(this->str,s);
     return *this;
-    // INTAL N;
+    // BIGINT N;
     // N.str = this->str;
     // string s = "1";
     // str = subtract(this->str,s);
     // return N;
 }
 
-INTAL INTAL::operator+(INTAL const &N){
-    INTAL N2;
+BIGINT BIGINT::operator+(BIGINT const &N){
+    BIGINT N2;
     N2.str = add(str,N.str);
     return N2;
 }
 
-
-INTAL INTAL::operator-(INTAL const &N){
-    INTAL N2;
+BIGINT BIGINT::operator-(BIGINT const &N){
+    BIGINT N2;
     N2.str = subtract(str,N.str);
     return N2;
 }
 
-INTAL INTAL::operator*(INTAL const &N){
-    INTAL N2;
+BIGINT BIGINT::operator*(BIGINT const &N){
+    BIGINT N2;
     N2.str = multiply(str,N.str);
     return N2;
 }
 
-INTAL INTAL::operator/(INTAL const &N){
-    INTAL N2;
+BIGINT BIGINT::operator/(BIGINT const &N){
+    BIGINT N2;
     string temp = N.str;
     stringstream convert(temp);
     long long int n = 0;
@@ -335,86 +336,91 @@ INTAL INTAL::operator/(INTAL const &N){
     return N2;
 }
 
-
-bool INTAL::operator==(INTAL const &N){
+bool BIGINT::operator==(BIGINT const &N){
     return this->str==N.str;
 }
 
-
-bool INTAL::operator!=(INTAL const &N){
+bool BIGINT::operator!=(BIGINT const &N){
     return this->str!=N.str;
 }
 
-//for adding INTAL and integer
-INTAL operator+(INTAL &N,int n){
-    INTAL N2;
+//for adding BIGINT and integer
+BIGINT operator+(BIGINT &N,int n){
+    BIGINT N2;
     ostringstream convert;
     convert<<n;
     N2.str = convert.str();
-    N2.str = INTAL::add(N.str,N2.str);
+    N2.str = BIGINT::add(N.str,N2.str);
     return N2;
 }
-//for subtracting INTAL and integer
-INTAL operator-(INTAL &N,int n){
-    INTAL N2;
+
+//for subtracting BIGINT and integer
+BIGINT operator-(BIGINT &N,int n){
+    BIGINT N2;
     ostringstream convert;
     convert<<n;
     N2.str = convert.str();
-    N2.str = INTAL::subtract(N.str,N2.str);
+    N2.str = BIGINT::subtract(N.str,N2.str);
     return N2;
 }
-//for product of  INTAL and integer
-INTAL operator*(INTAL &N,int n){
-    INTAL N2;
+
+//for product of BIGINT and integer
+BIGINT operator*(BIGINT &N,int n){
+    BIGINT N2;
     ostringstream convert;
     convert<<n;
     N2.str = convert.str();
-    N2.str = INTAL::multiply(N.str,N2.str);
+    N2.str = BIGINT::multiply(N.str,N2.str);
     return N2;
 }
-//for division INTAL and integer
-INTAL operator/(INTAL &N,int n){
-    INTAL N2;
-    N2.str = INTAL::division(N.str,(long long int)n);
+
+//for division BIGINT and integer
+BIGINT operator/(BIGINT &N,int n){
+    BIGINT N2;
+    N2.str = BIGINT::division(N.str,(long long int)n);
     return N2;
 }
-// for adding integer and INTAL
-INTAL operator+(int n, INTAL &N){
-    INTAL N2;
+
+// for adding integer and BIGINT
+BIGINT operator+(int n, BIGINT &N){
+    BIGINT N2;
     ostringstream convert;
     convert<<n;
     N2.str = convert.str();
-    N2.str = INTAL::add(N.str,N2.str);
+    N2.str = BIGINT::add(N.str,N2.str);
     return N2;    
 }
-// for subtracting integer and INTAL
-INTAL operator-(int n, INTAL &N){
-    INTAL N2;
+
+// for subtracting integer and BIGINT
+BIGINT operator-(int n, BIGINT &N){
+    BIGINT N2;
     ostringstream convert;
     convert<<n;
     N2.str = convert.str();
-    N2.str = INTAL::subtract(N.str,N2.str);
+    N2.str = BIGINT::subtract(N.str,N2.str);
     return N2;
 }
-// for product of integer and INTAL
-INTAL operator*(int n, INTAL &N){
-    INTAL N2;
+
+// for product of integer and BIGINT
+BIGINT operator*(int n, BIGINT &N){
+    BIGINT N2;
     ostringstream convert;
     convert<<n;
     N2.str = convert.str();
-    N2.str = INTAL::multiply(N.str,N2.str);
+    N2.str = BIGINT::multiply(N.str,N2.str);
     return N2;
 }
-// for division of integer and INTAL
-INTAL operator/(int n, INTAL &N){
-    INTAL N2;
-    N2.str = INTAL::division(N.str,(long long int)n);
+
+// for division of integer and BIGINT
+BIGINT operator/(int n, BIGINT &N){
+    BIGINT N2;
+    N2.str = BIGINT::division(N.str,(long long int)n);
     return N2;
 }
 
 
-INTAL INTAL::factINTAL(INTAL N){
-    INTAL N2;
+BIGINT BIGINT::factBIGINT(BIGINT N){
+    BIGINT N2;
     string s = N.str;
     stringstream convert(s);
     int n = 0;
@@ -423,8 +429,8 @@ INTAL INTAL::factINTAL(INTAL N){
     return N2;
 }
 
-INTAL INTAL::factINTAL(string s){
-    INTAL N2;
+BIGINT BIGINT::factBIGINT(string s){
+    BIGINT N2;
     stringstream convert(s);
     int n = 0;
     convert>>n;
@@ -432,14 +438,14 @@ INTAL INTAL::factINTAL(string s){
     return N2;
 }
 
-INTAL INTAL::factINTAL(int n){
-    INTAL N2;
+BIGINT BIGINT::factBIGINT(int n){
+    BIGINT N2;
     N2.str = factorial(n);
     return N2;
 }
 
 
-string INTAL::maxCompare(string s1, string s2){
+string BIGINT::maxCompare(string s1, string s2){
     string answer = "";
     int i;
     if(s1[0]=='-' and s2[0]!='-'){
@@ -489,7 +495,7 @@ string INTAL::maxCompare(string s1, string s2){
     return "0";
 }
 
-string INTAL::minCompare(string s1, string s2){
+string BIGINT::minCompare(string s1, string s2){
     string answer;
     answer = maxCompare(s1,s2);
     if(answer==s1){
@@ -500,7 +506,7 @@ string INTAL::minCompare(string s1, string s2){
     }
 }
 
-INTAL INTAL::maxINTAL(INTAL N1, INTAL N2){
+BIGINT BIGINT::maxBIGINT(BIGINT N1, BIGINT N2){
     string answer = maxCompare(N1.str,N2.str);
     if(N1.str==answer){
         return N1;
@@ -510,7 +516,7 @@ INTAL INTAL::maxINTAL(INTAL N1, INTAL N2){
     }    
 }
 
-INTAL INTAL::minINTAL(INTAL N1, INTAL N2){
+BIGINT BIGINT::minBIGINT(BIGINT N1, BIGINT N2){
     string answer = minCompare(N1.str,N2.str);
     if(N1.str==answer){
         return N1;
@@ -520,11 +526,11 @@ INTAL INTAL::minINTAL(INTAL N1, INTAL N2){
     }
 }
 
-INTAL INTAL::absINTAL(INTAL N){
+BIGINT BIGINT::absBIGINT(BIGINT N){
     string s = N.str;
     if(s[0]=='-'){
         s = s.substr(1);
     }
-    INTAL N2(s);
+    BIGINT N2(s);
     return N2;
 }
