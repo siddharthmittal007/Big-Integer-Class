@@ -58,5 +58,3 @@ class BIGINT {
         static BIGINT minINTAL(INTAL N1, INTAL N2);    
         static BIGINT absINTAL(INTAL N);
 };  
-
-// header
