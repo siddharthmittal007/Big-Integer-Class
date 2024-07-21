@@ -43,18 +43,20 @@ class BIGINT {
         friend BIGINT operator*(BIGINT &N,int n);
         friend BIGINT operator/(BIGINT &N,int n);
         friend BIGINT operator+(int n, BIGINT &N);
-        friend INTAL operator-(int n, INTAL &N);
-        friend INTAL operator*(int n, INTAL &N);
-        friend INTAL operator/(int n, INTAL &N);
+        friend BIGINT operator-(int n, INTAL &N);
+        friend BIGINT operator*(int n, INTAL &N);
+        friend BIGINT operator/(int n, INTAL &N);
         
-        static INTAL factINTAL(INTAL N);
-        static INTAL factINTAL(string s);
-        static INTAL factINTAL(int n);
+        static BIGINT factINTAL(INTAL N);
+        static BIGINT factINTAL(string s);
+        static BIGINT factINTAL(int n);
         
         static string maxCompare(string s1, string s2);
         static string minCompare(string s1, string s2);
 
-        static INTAL maxINTAL(INTAL N1, INTAL N2);
-        static INTAL minINTAL(INTAL N1, INTAL N2);    
-        static INTAL absINTAL(INTAL N);
+        static BIGINT maxINTAL(INTAL N1, INTAL N2);
+        static BIGINT minINTAL(INTAL N1, INTAL N2);    
+        static BIGINT absINTAL(INTAL N);
 };  
+
+// header
